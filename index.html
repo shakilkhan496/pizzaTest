@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Fraud Calculation</title>
+    <script>
+        function calculatePizzaLoss() {
+            const fullPizzaPrice = parseFloat(document.getElementById("fullPizzaPrice").value);
+            const fullPizzaSize = parseFloat(document.getElementById("fullPizzaSize").value);
+            const providedInch = parseFloat(document.getElementById("providedInch").value);
+
+            const correctRadius = fullPizzaSize / 2;
+            const correctArea = Math.PI * Math.pow(correctRadius, 2);
+
+            const providedRadius = providedInch / 2;
+            const providedArea = Math.PI * Math.pow(providedRadius, 2);
+
+            const lossArea = correctArea - providedArea;
+            const lossAmount = (lossArea / correctArea) * fullPizzaPrice;
+
+            document.getElementById("result").innerHTML = "Loss amount: $" + lossAmount.toFixed(2);
+        }
+    </script>
+</head>
+<body>
+    <h1>Pizza Fraud Calculation</h1>
+    <label for="fullPizzaPrice">Full Pizza Price ($): </label>
+    <input type="number" id="fullPizzaPrice" step="0.01" required><br>
+
+    <label for="fullPizzaSize">Full Pizza Size (inch): </label>
+    <input type="number" id="fullPizzaSize" step="0.01" required><br>
+
+    <label for="providedInch">Provided Pizza Size (inch): </label>
+    <input type="number" id="providedInch" step="0.01" required><br>
+
+    <button onclick="calculatePizzaLoss()">Calculate Loss</button>
+
+    <div id="result"></div>
+</body>
+</html>
